@@ -1,0 +1,12 @@
+<!-- @if(secondsLeft > 0){ 
+    <p>Seconds left to deadline: {{ secondsLeft }}</p>
+} @else {
+    <p>The deadline has passed.</p>
+} -->
+
+<div *ngIf="secondsLeft > 0; else deadlinePassed">
+    <p>Seconds left to deadline: {{ secondsLeft }}</p>
+</div>
+<ng-template #deadlinePassed>
+    <p>The deadline has passed.</p>
+</ng-template>

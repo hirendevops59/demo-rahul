@@ -1,0 +1,31 @@
+<div>
+    <br/>
+    <h2>Camera Coverage Checker</h2>
+    <button (click)="checkCameras()">Check Coverage</button>
+    <!-- <button (click)="willHardwareCamerasSuffice(softwareCamera, hardwareCameras)">Check Coverage</button> -->
+    <div *ngIf="isSufficient !== null">
+        <p>
+            Hardware cameras are
+            <strong>{{ isSufficient ? 'sufficient' : 'not sufficient' }}</strong>
+            to cover the desired ranges.
+        </p>
+    </div>
+    <br/>
+    <br/>
+    <hr>
+    <br/> 
+
+    <h3>Desired Ranges</h3>
+    <div>
+        <p><strong>Subject Distance Range:</strong> {{ desiredSubjectDistanceRange | json }}</p>
+        <p><strong>Light Level Range:</strong> {{ desiredLightLevelRange | json }}</p>
+    </div>
+
+    <h3>Hardware Cameras</h3>
+    <pre>
+        {{ hardwareCameras | json }}
+    </pre>
+    <br/>
+    <hr>
+    <br/> 
+</div>

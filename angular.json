@@ -1,0 +1,140 @@
+{
+	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+	"version": 1,
+	"newProjectRoot": "projects",
+	"projects": {
+		"coding-challenge": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/coding-challenge",
+			"sourceRoot": "projects/coding-challenge/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/coding-challenge",
+						"index": "projects/coding-challenge/src/index.html",
+						"polyfills": [
+							"zone.js"
+						],
+						"tsConfig": "projects/coding-challenge/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/coding-challenge/public",
+								"output": "."
+							}
+						],
+						"styles": [
+							"projects/coding-challenge/src/styles.scss"
+						],
+						"scripts": [],
+						"webWorkerTsConfig": "projects/coding-challenge/tsconfig.worker.json",
+						"main": "projects/coding-challenge/src/main.ts",
+						"extraWebpackConfig": "projects/coding-challenge/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+              "buildOptimizer": true,
+							"optimization": true,
+							"vendorChunk": false,
+							"sourceMap": false,
+							"namedChunks": false,
+							"outputHashing": "all",
+							"aot": true,
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kB",
+									"maximumError": "4kB"
+								}
+							],
+							"extraWebpackConfig": "projects/coding-challenge/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": true,
+							"optimization": false,
+							"vendorChunk": false,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true,
+							"aot": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "coding-challenge:build:production",
+							"extraWebpackConfig": "projects/coding-challenge/webpack.prod.config.js"
+						},
+						"development": {
+							"buildTarget": "coding-challenge:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4200,
+						"publicHost": "http://localhost:4200",
+						"extraWebpackConfig": "projects/coding-challenge/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/coding-challenge/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/coding-challenge/public"
+							}
+						],
+						"styles": [
+							"projects/coding-challenge/src/styles.scss"
+						],
+						"scripts": [],
+						"webWorkerTsConfig": "projects/coding-challenge/tsconfig.worker.json"
+					}
+				},
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
+					"options": {
+						"lintFilePatterns": [
+							"projects/coding-challenge/**/*.ts",
+							"projects/coding-challenge/**/*.html"
+						],
+						"eslintConfig": "projects/coding-challenge/eslint.config.js"
+					}
+				}
+			}
+		}
+	},
+	"cli": {
+		"analytics": false,
+		"schematicCollections": [
+			"@angular-eslint/schematics"
+		]
+	}
+}
